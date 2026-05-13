@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沐屹鸿图智能科技（重庆）有限公司 | 实训室建设·数字孪生·物联网AI实训</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:"Microsoft Yahei",sans-serif;
+            background:#02040e;
+            color:#e6edf7;
+            line-height:1.8;
+            overflow-x:hidden;
+        }
+        /* 暗黑粒子背景 */
+        .bg-particle{
+            position:fixed;
+            top:0;left:0;
+            width:100%;height:100%;
+            background:#02040e url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23 11c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-6 75c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-29-4c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm60-64c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM36 72c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z' fill='%23102040' fill-opacity='0.3' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index:-1;
+        }
+        /* 导航栏 */
+        header{
+            position:fixed;
+            width:100%;
+            top:0;
+            background:rgba(2,4,14,0.85);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid #152548;
+            z-index:999;
+        }
+        .nav-container{
+            max-width:1200px;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 20px;
+        }
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+            color:#00bfff;
+            text-shadow:0 0 10px #00bfff;
+        }
+        .nav-menu a{
+            color:#c0d8f4;
+            text-decoration:none;
+            margin-left:22px;
+            transition:0.3s;
+            font-size:15px;
+        }
+        .nav-menu a:hover{
+            color:#00bfff;
+            text-shadow:0 0 8px #00bfff;
+        }
+        /* 首页横幅 */
+        .banner{
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:0 20px;
+            border-bottom:1px solid #152548;
+        }
+        .banner h1{
+            font-size:40px;
+            color:#fff;
+            margin-bottom:20px;
+            text-shadow:0 0 20px #00bfff;
+        }
+        .banner p{
+            font-size:18px;
+            color:#94b8e8;
+            max-width:900px;
+            line-height:2;
+        }
+        .btn{
+            display:inline-block;
+            margin-top:35px;
+            padding:12px 40px;
+            border:1px solid #00bfff;
+            color:#00bfff;
+            text-decoration:none;
+            border-radius:30px;
+            transition:0.4s;
+            background:rgba(0,191,255,0.05);
+        }
+        .btn:hover{
+            background:#00bfff;
+            color:#02040e;
+            box-shadow:0 0 20px #00bfff;
+        }
+        /* 通用板块 */
+        .section{
+            max-width:1200px;
+            margin:100px auto;
+            padding:0 20px;
+        }
+        .section-title{
+            text-align:center;
+            font-size:30px;
+            margin-bottom:60px;
+            color:#00bfff;
+            position:relative;
+        }
+        .section-title::after{
+            content:"";
+            display:block;
+            width:100px;
+            height:2px;
+            background:linear-gradient(90deg,transparent,#00bfff,transparent);
+            margin:15px auto;
+        }
+        /* 业务卡片网格 */
+        .grid-wrap{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+        .card{
+            background:rgba(10,15,35,0.6);
+            border:1px solid #152548;
+            padding:30px 25px;
+            border-radius:14px;
+            transition:0.4s;
+        }
+        .card:hover{
+            border-color:#00bfff;
+            transform:translateY(-8px);
+            box-shadow:0 10px 40px rgba(0,191,255,0.15);
+        }
+        .card h3{
+            color:#fff;
+            margin-bottom:15px;
+            font-size:20px;
+        }
+        .card p{
+            color:#94b8e8;
+            font-size:15px;
+        }
+        /* 文本板块 */
+        .text-content{
+            max-width:1100px;
+            margin:0 auto;
+            color:#94b8e8;
+            font-size:16px;
+            line-height:2;
+        }
+        /* 联系我们 */
+        .contact-box{
+            background:rgba(10,15,35,0.6);
+            border:1px solid #152548;
+            border-radius:14px;
+            padding:40px;
+            text-align:center;
+            color:#94b8e8;
+            font-size:17px;
+            line-height:2.5;
+        }
+        .contact-box strong{
+            color:#00bfff;
+        }
+        .wx-placeholder{
+            width:160px;
+            height:160px;
+            border:1px dashed #00bfff;
+            border-radius:8px;
+            margin:15px auto;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#00bfff;
+        }
+        /* 页脚 */
+        footer{
+            background:rgba(8,12,30,0.8);
+            text-align:center;
+            padding:30px 20px;
+            border-top:1px solid #152548;
+            color:#647898;
+        }
+        /* 移动端适配 */
+        @media(max-width:768px){
+            .nav-menu{display:none;}
+            .banner h1{font-size:26px;}
+            .section-title{font-size:24px;}
+        }
+    </style>
+</head>
+<body>
+    <!-- 暗黑粒子背景 -->
+    <div class="bg-particle"></div>
+
+    <!-- 导航栏 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">沐屹鸿图 MYHP</div>
+            <div class="nav-menu">
+                <a href="#home">首页</a>
+                <a href="#about">公司简介</a>
+                <a href="#business">核心业务</a>
+                <a href="#product">产品中心</a>
+                <a href="#simulation">虚拟仿真</a>
+                <a href="#match">赛事支撑</a>
+                <a href="#case">经典案例</a>
+                <a href="#contact">联系我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首页横幅 -->
+    <section class="banner" id="home">
+        <div>
+            <h1>沐屹鸿图智能科技（重庆）有限公司</h1>
+            <p>理工科实训室规划设计 · 建设实施全流程交付<br>数字孪生虚拟仿真 · 物联网/AI智能实训设备研发集成<br>产教融合一体化智慧实训解决方案服务商</p>
+            <a href="#business" class="btn">了解核心业务</a>
+        </div>
+    </section>
+
+    <!-- 公司简介 -->
+    <section class="section" id="about">
+        <h2 class="section-title">公司简介</h2>
+        <div class="text-content">
+            <p>沐屹鸿图智能科技(重庆)有限公司是一家专注于教育实训领域的综合服务商，核心业务涵盖实训室全流程整体建设与全品类专业实训设备的研发、集成与供应。</p>
+            <p>公司配套数字孪生虚拟仿真工具与数字教学平台，为职业院校、本科院校提供从顶层规划、硬件部署到数字化赋能的一体化智慧实训解决方案，助力院校打造软硬协同、虚实融合的现代化实训教学环境。</p>
+            <p>核心优势：<br>
+            ✅ 技术自研：自主研发数字孪生引擎与物联网平台，深度适配教育场景<br>
+            ✅ 软硬一体：设备+软件+平台一站式交付，降低集成风险与成本<br>
+            ✅ 产教融合：方案贴合产业标准，对接企业岗位需求<br>
+            ✅ 服务闭环：全生命周期技术支持与持续迭代升级
+            </p>
+        </div>
+    </section>
+
+    <!-- 核心业务 -->
+    <section class="section" id="business">
+        <h2 class="section-title">核心业务</h2>
+        <div class="grid-wrap">
+            <div class="card">
+                <h3>实训室整体规划建设</h3>
+                <p>理工科专业实训室顶层规划、空间布局设计、整体工程施工、设备集成、调试验收全流程交付。</p>
+            </div>
+            <div class="card">
+                <h3>专业实训设备研发集成</h3>
+                <p>物联网、嵌入式、AI、工业自动化、新能源电力、智能农业、车联网等实训设备研发与供应。</p>
+            </div>
+            <div class="card">
+                <h3>数字孪生虚拟仿真</h3>
+                <p>智慧建筑、智能制造、智慧交通、低空经济等专业虚拟仿真系统开发与平台部署。</p>
+            </div>
+            <div class="card">
+                <h3>物联网智能管控平台</h3>
+                <p>实训室设备、环境、人员、安全一体化智能监控管理，实现数据互通、虚实联动。</p>
+            </div>
+            <div class="card">
+                <h3>数字教材教学平台</h3>
+                <p>交互式数字教材创编、多终端阅读、教学管控、在线实验、课程资源配套服务。</p>
+            </div>
+            <div class="card">
+                <h3>赛事支撑与校企合作</h3>
+                <p>机器人及人工智能大赛技术支撑、设备支持、师资培训、课题科研、人才输送。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品中心 -->
+    <section class="section" id="product">
+        <h2 class="section-title">产品中心</h2>
+        <div class="grid-wrap">
+            <div class="card">
+                <h3>产业实训平台</h3>
+                <p>电力物联网、智能农业、车联网、工业液位检测、工业缺陷检测、智能产线、无人车、边缘计算终端、AI边缘实验平台。</p>
+            </div>
+            <div class="card">
+                <h3>专业基础实验箱</h3>
+                <p>5G鸿蒙物联网箱、多协议物联网箱、智能产品开发箱、工业控制电机综合实验箱。</p>
+            </div>
+            <div class="card">
+                <h3>实践开发套件</h3>
+                <p>FPGA开发套件、开放式CPU平台、嵌入式A72/A74科研平台、STM32教学考研平台。</p>
+            </div>
+            <div class="card">
+                <h3>实训行业套件</h3>
+                <p>四轴飞行器、六轴机械手臂、ROS机器人、平衡车、智能视觉开发套件等。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 虚拟仿真 -->
+    <section class="section" id="simulation">
+        <h2 class="section-title">虚拟仿真系列</h2>
+        <div class="grid-wrap">
+            <div class="card">
+                <h3>智慧建筑仿真</h3>
+                <p>楼宇自控、消防、能耗、安防、BIM运维、IBMS集成管理平台虚拟仿真系统。</p>
+            </div>
+            <div class="card">
+                <h3>智能制造仿真</h3>
+                <p>数控加工、工业机器人、智能产线、智能仓储、数字孪生工厂、设备拆装故障诊断。</p>
+            </div>
+            <div class="card">
+                <h3>智慧交通低空经济</h3>
+                <p>城市交通仿真、隧道桥梁实训、无人机低空物流、飞行作业虚拟仿真实训平台。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 赛事支撑 -->
+    <section class="section" id="match">
+        <h2 class="section-title">赛事支撑</h2>
+        <div class="text-content">
+            <p>深度支撑<strong>中国机器人及人工智能大赛</strong>（国家级A类学科竞赛），创办于1999年，校赛-省赛-国赛三级选拔，累计千余所高校、数十万师生参赛。</p>
+            <p>公司为合作院校提供：赛事设备支撑、技术指导、方案研发、软硬件调试、实训课程配套，助力参赛队伍斩获全国一等奖、省级一二等奖多项荣誉，深度推进产教融合与创新创业人才培养。</p>
+        </div>
+    </section>
+
+    <!-- 经典案例 -->
+    <section class="section" id="case">
+        <h2 class="section-title">经典合作案例</h2>
+        <div class="grid-wrap">
+            <div class="card">
+                <h3>河北工业大学</h3>
+                <p>人工智能与数据科学学院AI实验室建设，云+AI+FPGA架构，支撑多门人工智能专业课程教学与科研项目。</p>
+            </div>
+            <div class="card">
+                <h3>湖北汽车工业学院</h3>
+                <p>人工智能与机器人工程实验室，搭建AI算力池、FPGA资源池、智能移动机器人与视觉实训体系。</p>
+            </div>
+            <div class="card">
+                <h3>湖北工业大学</h3>
+                <p>人工智能和电子信息综合实训中心，完善虚拟化资源、AI平台、无人车、工业缺陷检测实训集群。</p>
+            </div>
+            <div class="card">
+                <h3>韩山师范学院</h3>
+                <p>智慧工厂实训系统、六轴机械臂、机器视觉分拣、激光雕刻实训平台落地应用。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="section" id="contact">
+        <h2 class="section-title">联系我们</h2>
+        <div class="contact-box">
+            <p><strong>公司名称：</strong>沐屹鸿图智能科技（重庆）有限公司</p>
+            <p><strong>公司地址：</strong>重庆市两江新区杨柳路6号三狼公园6号E3-107</p>
+            <p><strong>商务热线：</strong>15310206190</p>
+            
+            <!-- 预留微信内容
+            <p><strong>微信咨询：</strong>下方预留二维码位置，后期可直接替换图片</p>
+            <div class="wx-placeholder">微信二维码<br>预留占位</div>  
+            -->
+            
+            <p>欢迎本科院校、高职中职、科研机构、企事业单位洽谈项目共建、方案定制、设备采购合作</p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        © 2025 沐屹鸿图智能科技（重庆）有限公司 版权所有 | MYHT 暗黑科技风企业官网
+    </footer>
+
+    <!-- 平滑滚动 -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+            anchor.addEventListener('click',function(e){
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior:'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
